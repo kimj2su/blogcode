@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class LoginController {
 
-    @GetMapping("/CustomOAuth2AuthorizationRequestsResolver")
-    public String home() {
-        return "CustomOAuth2AuthorizationRequestsResolver";
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
     }
 }
