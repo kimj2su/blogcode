@@ -10,4 +10,9 @@ public class HomeController {
     public String home() {
         return "CustomOAuth2AuthorizationRequestsResolver";
     }
+
+    @GetMapping("/home")
+    public String home2() {
+        return "home";
+    }
 }

@@ -35,11 +35,19 @@ public class OAuth2ClientConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(oauthRequest -> oauthRequest.antMatchers("/login").permitAll()
-                .antMatchers("/CustomOAuth2AuthorizationRequestsResolver").permitAll()
-                .anyRequest().authenticated());
-        http.oauth2Login(oauthLogin -> oauthLogin.authorizationEndpoint(authEndpoint ->
-                authEndpoint.authorizationRequestResolver(customAuth2AuthorizationRequestResolver())));
+        http.authorizeRequests(authRequest -> authRequest
+                        .antMatchers("/home", "/client").permitAll()
+                        .anyRequest().authenticated())
+//                .oauth2Login(Customizer.withDefaults())
+                .oauth2Client(Customizer.withDefaults());
+
+        http.logout().logoutSuccessUrl("/home");
+
+//        http.authorizeRequests(oauthRequest -> oauthRequest.antMatchers("/login").permitAll()
+//                .antMatchers("/CustomOAuth2AuthorizationRequestsResolver").permitAll()
+//                .anyRequest().authenticated());
+//        http.oauth2Login(oauthLogin -> oauthLogin.authorizationEndpoint(authEndpoint ->
+//                authEndpoint.authorizationRequestResolver(customAuth2AuthorizationRequestResolver())));
         /*
          Authorization BaseUri & Redirection BaseUri 커스텀
          */
@@ -50,11 +58,11 @@ public class OAuth2ClientConfig {
 //                        redirectionEndpointConfig.baseUri("/login/v1/oauth2/code/*"))
 //        );
         //openid connect 로그아웃
-        http.logout()
-                .logoutSuccessHandler(oidcLogoutSuccessHandler())
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .deleteCookies("JSESSIONID");
+//        http.logout()
+//                .logoutSuccessHandler(oidcLogoutSuccessHandler())
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true)
+//                .deleteCookies("JSESSIONID");
         return http.build();
     }
 
