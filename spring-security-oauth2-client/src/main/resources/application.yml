@@ -5,37 +5,18 @@ spring:
     oauth2:
       client:
         registration:
-          keycloak1:
+          keycloak:
             clientId: oauth2-client-app                                        #서비스 공급자에 등록된 클라이언트 아이디
             clientSecret: qQ7cYPYopQBhaP7eTPbZzKnBVBcYkkNj                     #서비스 공급자에 등록된 클라이언트 비빌번호
             clientName: oauth2-client-app                                      #클라이언트 이름
             authorizationGrantType: authorization_code                         #OAuth 2.0 권한 부여 타입
             scope: openid,profile                                              #리소스에 접근 제한 범위
             clientAuthenticationMethod: client_secret_basic                    #클라이언트 자격증명 전송방식
-            redirectUri: http://localhost:8081/login/oauth2/code/keycloak   #인가서버에서 권한 코드 부여 후 클라이언트로 리다이렉트 하는 위치
+#            redirectUri: http://localhost:8081/login/oauth2/code/keycloak   #인가서버에서 권한 코드 부여 후 클라이언트로 리다이렉트 하는 위치
 #            redirectUri: http://localhost:8081/login/v1/oauth2/code/keycloak   #인가서버에서 권한 코드 부여 후 클라이언트로 리다이렉트 하는 위치, 리다이렉트 커스텀
-#            redirectUri: http://localhost:8081/client
+            redirectUri: http://localhost:8081/client
             provider: keycloak
 
-          keycloakWithPKCE:
-            clientId: oauth2-client-app2
-            clientSecret: WS7PtSyFasAl2aM2HweFkfKFi13NTqjA
-            clientName: oauth2-client-app2
-            authorizationGrantType: authorization_code
-            scope: openid,profile
-            clientAuthenticationMethod: client_secret_basic                 #디폴트로 해야 PKCE 방식이 실행이 됨
-            redirectUri: http://localhost:8081/login/oauth2/code/keycloak
-            provider: keycloak
-
-          keycloak2:
-            clientId: oauth2-client-app3
-            clientSecret: qQ7cYPYopQBhaP7eTPbZzKnBVBcYkkNj
-            clientName: oauth2-client-app3
-            authorizationGrantType: implicit
-            scope: openid,profile
-            clientAuthenticationMethod: none
-            redirectUri: http://localhost:8081/CustomOAuth2AuthorizationRequestsResolver
-            provider: keycloak
 
 
         provider:   ## 공급자 설정
