@@ -1,5 +1,6 @@
-package com.example.springsecurityoauth2client;
+package com.example.springsecurityoauth2client.config;
 
+import com.example.springsecurityoauth2client.CustomOAuth2AuthorizationRequestResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
@@ -36,12 +37,12 @@ public class OAuth2ClientConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(authRequest -> authRequest
-                        .antMatchers("/home", "/client").permitAll()
+                        .antMatchers("/home", "/client", "/logout", "/oauth2Login", "/").permitAll()
                         .anyRequest().authenticated())
 //                .oauth2Login(Customizer.withDefaults())
                 .oauth2Client(Customizer.withDefaults());
 
-        http.logout().logoutSuccessUrl("/home");
+//        http.logout().logoutSuccessUrl("/home");
 
 //        http.authorizeRequests(oauthRequest -> oauthRequest.antMatchers("/login").permitAll()
 //                .antMatchers("/CustomOAuth2AuthorizationRequestsResolver").permitAll()

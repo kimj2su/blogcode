@@ -6,29 +6,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <script>
-    function authorizationCode(){
-      window.location = new URL('http://localhost:8081/oauth2/authorization/keycloak');
-    }
-
-    function password(){
-      window.location = new URL('http://localhost:8081/oauth2/authorization/keycloak2');
-    }
-
-    function clientCredentials(){
-      window.location = new URL('http://localhost:8081/oauth2/authorization/keycloak3');
-    }
-
-
-  </script>
 </head>
 <body>
-<div>Welcome</div>
-<form sec:authorize="isAnonymous()" action="#">
-  <p><input type="button" onclick="authorizationCode()" value="AuthorizationCode Grant" />
-  <p><input type="button" onclick="password()" value="Resource Owner Password Grant" />
-  <p><input type="button" onclick="clientCredentials()" value="Client Credentials Grant" />
-</form>
+<div>Welcome <p><span th:text = "${oAuth2AuthenticationToken}"></span></p></div>
+<div>
+  <a href="/logout">Logout</a>
+</div>
 </body>
 </html>
 Footer
