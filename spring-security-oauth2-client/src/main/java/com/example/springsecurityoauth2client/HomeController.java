@@ -8,11 +8,11 @@ public class HomeController {
 
     @GetMapping("/CustomOAuth2AuthorizationRequestsResolver")
     public String home() {
-        return "CustomOAuth2AuthorizationRequestsResolver";
+        return "oauth2.0client/CustomOAuth2AuthorizationRequestsResolver";
     }
 
     @GetMapping("/home")
     public String home2() {
-        return "home";
+        return "oauth2.0client/home";
     }
 }

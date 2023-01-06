@@ -7,6 +7,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
@@ -35,14 +36,20 @@ public class OAuth2ClientConfig {
 //    }
 
     @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/static/js/**", "/static/images/**", "/static/css/**", "/statis/scss/**");
+    }
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        //social Login
         http.authorizeRequests(authRequest -> authRequest
                         .antMatchers("/home", "/client", "/logout", "/oauth2Login", "/").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated());
 //                .oauth2Login(Customizer.withDefaults())
-                .oauth2Client(Customizer.withDefaults());
+//                .oauth2Client(Customizer.withDefaults());
+        http.oauth2Login(Customizer.withDefaults());
 
-//        http.logout().logoutSuccessUrl("/home");
+        http.logout().logoutSuccessUrl("/home");
 
 //        http.authorizeRequests(oauthRequest -> oauthRequest.antMatchers("/login").permitAll()
 //                .antMatchers("/CustomOAuth2AuthorizationRequestsResolver").permitAll()

@@ -70,7 +70,7 @@ public class ClientController {
         model.addAttribute("principalName", oAuth2User.getName());
         model.addAttribute("clientName", authorizedClient1.getClientRegistration().getClientName());
 
-        return "/client";
+        return "oauth2.0client/client";
 
 
     }
