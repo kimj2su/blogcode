@@ -1,5 +1,7 @@
-package com.example.springsecurityoauth2client;
+package com.example.springsecurityoauth2client.controller;
 
+import com.example.springsecurityoauth2client.common.util.OAuth2Utils;
+import com.example.springsecurityoauth2client.model.PrincipalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -45,29 +47,49 @@ public class IndexController {
 //    }
 
     @GetMapping("/")
-    public String index(Model model, Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
+    public String index(Model model, Authentication authentication, @AuthenticationPrincipal PrincipalUser principalUser) {
 
-        OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
-        if (oAuth2AuthenticationToken != null) {
-            Map<String, Object> attributes = oAuth2User.getAttributes();
-            String name = (String) attributes.get("name");
+        if (authentication != null) {
 
-            if (oAuth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
-                Map<String, Object> response = (Map) attributes.get("response");
-                name = (String) response.get("name");
+            String userName;
+
+            if (authentication instanceof OAuth2AuthenticationToken) {
+                userName = OAuth2Utils.oAuth2UserName((OAuth2AuthenticationToken) authentication, principalUser);
+            } else {
+                userName = principalUser.providerUser().getUsername();
             }
-            model.addAttribute("user", name);
+
+            model.addAttribute("user", userName);
+            model.addAttribute("provider", principalUser.providerUser().getProvider());
         }
-//        ClientRegistration keycloak = clientRegistrationRepository.findByRegistrationId("keycloak1");
-//
-//        String clientId = keycloak.getClientId();
-//        System.out.println("clientId = " + clientId);
-//
-//        String redirectUri = keycloak.getRedirectUri();
-//        System.out.println("redirectUri = " + redirectUri);
 
         return "socialLogin/index";
     }
+
+//    @GetMapping("/")
+//    public String index(Model model, Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
+//
+//        OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
+//        if (oAuth2AuthenticationToken != null) {
+//            Map<String, Object> attributes = oAuth2User.getAttributes();
+//            String name = (String) attributes.get("name");
+//
+//            if (oAuth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
+//                Map<String, Object> response = (Map) attributes.get("response");
+//                name = (String) response.get("name");
+//            }
+//            model.addAttribute("user", name);
+//        }
+////        ClientRegistration keycloak = clientRegistrationRepository.findByRegistrationId("keycloak1");
+////
+////        String clientId = keycloak.getClientId();
+////        System.out.println("clientId = " + clientId);
+////
+////        String redirectUri = keycloak.getRedirectUri();
+////        System.out.println("redirectUri = " + redirectUri);
+//
+//        return "socialLogin/index";
+//    }
 
     /*
     Oauth2 User 모델 소개

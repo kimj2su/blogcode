@@ -1,4 +1,4 @@
-package com.example.springsecurityoauth2client.config;
+package com.example.springsecurityoauth2client.common.authority;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

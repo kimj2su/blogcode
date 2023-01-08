@@ -1,5 +1,6 @@
-package com.example.springsecurityoauth2client.model;
+package com.example.springsecurityoauth2client.model.social;
 
+import com.example.springsecurityoauth2client.model.OAuth2ProviderUser;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -17,5 +18,10 @@ public class KeycloakUser extends OAuth2ProviderUser {
     @Override
     public String getUsername() {
         return (String) getAttributes().get("preferred_username");
+    }
+
+    @Override
+    public String getPicture() {
+        return null;
     }
 }

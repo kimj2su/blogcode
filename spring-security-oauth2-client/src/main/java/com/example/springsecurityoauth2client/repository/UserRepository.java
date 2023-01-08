@@ -1,6 +1,6 @@
 package com.example.springsecurityoauth2client.repository;
 
-import com.example.springsecurityoauth2client.model.User;
+import com.example.springsecurityoauth2client.model.users.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

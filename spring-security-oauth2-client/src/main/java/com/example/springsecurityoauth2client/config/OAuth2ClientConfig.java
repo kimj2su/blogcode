@@ -1,11 +1,10 @@
 package com.example.springsecurityoauth2client.config;
 
-import com.example.springsecurityoauth2client.CustomOAuth2AuthorizationRequestResolver;
+import com.example.springsecurityoauth2client.common.authority.CustomAuthorityMapper;
 import com.example.springsecurityoauth2client.service.CustomOAuth2UserService;
 import com.example.springsecurityoauth2client.service.CustomOidcUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +14,7 @@ import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInit
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
@@ -57,13 +57,14 @@ public class OAuth2ClientConfig {
                 .anyRequest().authenticated());
 //                .oauth2Login(Customizer.withDefaults())
 //                .oauth2Client(Customizer.withDefaults());
+        http.formLogin().loginPage("/login").loginProcessingUrl("/loginProc").defaultSuccessUrl("/").permitAll();
+        http.exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
         http.oauth2Login(oauth2 ->
                 oauth2.userInfoEndpoint(userInfoEndpointConfig ->
                         userInfoEndpointConfig
-                                .userService(customOAuth2UserService)
-                                .oidcUserService(customOidcUserSeervide)));
-
-        http.logout().logoutSuccessUrl("/");
+                                .userService(customOAuth2UserService) //OAuth2
+                                .oidcUserService(customOidcUserSeervide))); //OpenID Connect
+//        http.logout().logoutSuccessUrl("/");
 
 //        http.authorizeRequests(oauthRequest -> oauthRequest.antMatchers("/login").permitAll()
 //                .antMatchers("/CustomOAuth2AuthorizationRequestsResolver").permitAll()

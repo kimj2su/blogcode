@@ -1,7 +1,7 @@
 package com.example.springsecurityoauth2client.service;
 
 import com.example.springsecurityoauth2client.model.ProviderUser;
-import com.example.springsecurityoauth2client.model.User;
+import com.example.springsecurityoauth2client.model.users.User;
 import com.example.springsecurityoauth2client.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

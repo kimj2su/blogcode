@@ -1,4 +1,4 @@
-package com.example.springsecurityoauth2client;
+package com.example.springsecurityoauth2client.config;
 
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;

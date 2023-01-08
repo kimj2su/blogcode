@@ -1,4 +1,4 @@
-package com.example.springsecurityoauth2client;
+package com.example.springsecurityoauth2client.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

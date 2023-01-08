@@ -1,4 +1,4 @@
-package com.example.springsecurityoauth2client;
+package com.example.springsecurityoauth2client.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,16 +22,16 @@ public class HomeController {
     }
 
     @GetMapping("/api/user")
-    public String user(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
+    public Authentication user(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
         System.out.println("authentication = " + authentication + ", oAuth2User = " + oAuth2User);
 
-        return "authentication";
+        return authentication;
     }
 
-    @GetMapping("/api/oidf")
-    public String odic(Authentication authentication, @AuthenticationPrincipal OidcUser oidcUser) {
+    @GetMapping("/api/oidc")
+    public Authentication oidc(Authentication authentication, @AuthenticationPrincipal OidcUser oidcUser) {
         System.out.println("authentication = " + authentication + ", oidcUser = " + oidcUser);
 
-        return "authentication";
+        return authentication;
     }
 }

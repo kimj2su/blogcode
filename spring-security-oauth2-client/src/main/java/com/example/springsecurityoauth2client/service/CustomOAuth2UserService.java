@@ -1,5 +1,8 @@
 package com.example.springsecurityoauth2client.service;
 
+import com.example.springsecurityoauth2client.common.converters.ProviderUserConverter;
+import com.example.springsecurityoauth2client.common.converters.ProviderUserRequest;
+import com.example.springsecurityoauth2client.model.PrincipalUser;
 import com.example.springsecurityoauth2client.model.ProviderUser;
 import com.example.springsecurityoauth2client.repository.UserRepository;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -14,8 +17,8 @@ import org.springframework.stereotype.Service;
 public class CustomOAuth2UserService extends AbstractOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
 
-    public CustomOAuth2UserService(UserRepository userRepository, UserService userService) {
-        super(userRepository, userService);
+    public CustomOAuth2UserService(UserRepository userRepository, UserService userService, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+        super(userRepository, userService, providerUserConverter);
     }
 
     @Override
@@ -25,11 +28,13 @@ public class CustomOAuth2UserService extends AbstractOAuth2UserService implement
         OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
 
-        ProviderUser providerUser = super.providerUser(clientRegistration, oAuth2User);
+        ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration, oAuth2User);
+
+        ProviderUser providerUser = providerUser(providerUserRequest);
         //회원 가입 하기
         super.register(providerUser, userRequest);
 
 
-        return oAuth2User;
+        return new PrincipalUser(providerUser);
     }
 }

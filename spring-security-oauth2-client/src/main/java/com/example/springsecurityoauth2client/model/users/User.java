@@ -1,4 +1,4 @@
-package com.example.springsecurityoauth2client.model;
+package com.example.springsecurityoauth2client.model.users;
 
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +15,8 @@ public class User {
     private String id;
 
     private String username;
+
+    private String password;
 
     private String provider;
 
