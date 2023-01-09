@@ -1,4 +1,4 @@
-package com.example.springsecurityoauth2client;
+package com.example.springsecurityoauth2client.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -70,7 +70,7 @@ public class ClientController {
         model.addAttribute("principalName", oAuth2User.getName());
         model.addAttribute("clientName", authorizedClient1.getClientRegistration().getClientName());
 
-        return "/client";
+        return "oauth2.0client/client";
 
 
     }

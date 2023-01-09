@@ -1,5 +1,7 @@
-package com.example.springsecurityoauth2client;
+package com.example.springsecurityoauth2client.controller;
 
+import com.example.springsecurityoauth2client.common.util.OAuth2Utils;
+import com.example.springsecurityoauth2client.model.PrincipalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,14 +14,13 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -31,19 +32,60 @@ public class IndexController {
     @Autowired
     private ClientRegistrationRepository clientRegistrationRepository;
 
+//    @GetMapping("/")
+//    public String index() {
+//
+////        ClientRegistration keycloak = clientRegistrationRepository.findByRegistrationId("keycloak1");
+////
+////        String clientId = keycloak.getClientId();
+////        System.out.println("clientId = " + clientId);
+////
+////        String redirectUri = keycloak.getRedirectUri();
+////        System.out.println("redirectUri = " + redirectUri);
+//
+//        return "oauth2.0client/index";
+//    }
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model, Authentication authentication, @AuthenticationPrincipal PrincipalUser principalUser) {
 
-//        ClientRegistration keycloak = clientRegistrationRepository.findByRegistrationId("keycloak1");
-//
-//        String clientId = keycloak.getClientId();
-//        System.out.println("clientId = " + clientId);
-//
-//        String redirectUri = keycloak.getRedirectUri();
-//        System.out.println("redirectUri = " + redirectUri);
+        String view = "socialLogin/index";
+        if (authentication != null) {
 
-        return "index";
+            String userName = principalUser.providerUser().getUsername();
+
+            model.addAttribute("user", userName);
+            model.addAttribute("provider", principalUser.providerUser().getProvider());
+            if (!principalUser.providerUser().isCertificated()) view = "socialLogin/selfcert";
+        }
+
+        return view;
     }
+
+//    @GetMapping("/")
+//    public String index(Model model, Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
+//
+//        OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
+//        if (oAuth2AuthenticationToken != null) {
+//            Map<String, Object> attributes = oAuth2User.getAttributes();
+//            String name = (String) attributes.get("name");
+//
+//            if (oAuth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
+//                Map<String, Object> response = (Map) attributes.get("response");
+//                name = (String) response.get("name");
+//            }
+//            model.addAttribute("user", name);
+//        }
+////        ClientRegistration keycloak = clientRegistrationRepository.findByRegistrationId("keycloak1");
+////
+////        String clientId = keycloak.getClientId();
+////        System.out.println("clientId = " + clientId);
+////
+////        String redirectUri = keycloak.getRedirectUri();
+////        System.out.println("redirectUri = " + redirectUri);
+//
+//        return "socialLogin/index";
+//    }
 
     /*
     Oauth2 User 모델 소개
