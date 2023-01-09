@@ -18,6 +18,7 @@ public interface ProviderUser {
     String getPicture();
 
     String getProvider();
+    boolean isCertificated();
 
     List<? extends GrantedAuthority> getAuthorities();
 
@@ -25,4 +26,5 @@ public interface ProviderUser {
 
     OAuth2User getOAuth2User();
 
+    void isCertificated(boolean bool);
 }

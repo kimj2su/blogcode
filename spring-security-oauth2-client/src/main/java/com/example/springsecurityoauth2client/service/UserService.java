@@ -19,6 +19,7 @@ public class UserService {
                 .username(providerUser.getUsername())
                 .provider(providerUser.getPassword())
                 .email(providerUser.getEmail())
+                .picture(providerUser.getPicture())
                 .authorities(providerUser.getAuthorities())
                 .build();
         userRepository.register(user);

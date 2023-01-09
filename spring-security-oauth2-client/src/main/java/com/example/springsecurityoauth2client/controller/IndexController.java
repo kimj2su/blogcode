@@ -49,21 +49,17 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, Authentication authentication, @AuthenticationPrincipal PrincipalUser principalUser) {
 
+        String view = "socialLogin/index";
         if (authentication != null) {
 
-            String userName;
-
-            if (authentication instanceof OAuth2AuthenticationToken) {
-                userName = OAuth2Utils.oAuth2UserName((OAuth2AuthenticationToken) authentication, principalUser);
-            } else {
-                userName = principalUser.providerUser().getUsername();
-            }
+            String userName = principalUser.providerUser().getUsername();
 
             model.addAttribute("user", userName);
             model.addAttribute("provider", principalUser.providerUser().getProvider());
+            if (!principalUser.providerUser().isCertificated()) view = "socialLogin/selfcert";
         }
 
-        return "socialLogin/index";
+        return view;
     }
 
 //    @GetMapping("/")

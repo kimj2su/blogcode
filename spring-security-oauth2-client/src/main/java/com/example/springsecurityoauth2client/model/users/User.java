@@ -14,6 +14,8 @@ public class User {
 
     private String id;
 
+    private String ci;
+
     private String username;
 
     private String password;
@@ -21,6 +23,8 @@ public class User {
     private String provider;
 
     private String email;
+
+    private String picture;
 
     private List<? extends GrantedAuthority> authorities;
 }

@@ -1,5 +1,6 @@
 package com.example.springsecurityoauth2client.service;
 
+import com.example.springsecurityoauth2client.certification.SelfCertification;
 import com.example.springsecurityoauth2client.common.converters.ProviderUserConverter;
 import com.example.springsecurityoauth2client.common.converters.ProviderUserRequest;
 import com.example.springsecurityoauth2client.model.PrincipalUser;
@@ -17,8 +18,8 @@ import org.springframework.stereotype.Service;
 public class CustomOAuth2UserService extends AbstractOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
 
-    public CustomOAuth2UserService(UserRepository userRepository, UserService userService, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
-        super(userRepository, userService, providerUserConverter);
+    public CustomOAuth2UserService(UserRepository userRepository, UserService userService, SelfCertification certification, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+        super(userRepository, userService, certification, providerUserConverter);
     }
 
     @Override

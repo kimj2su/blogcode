@@ -1,5 +1,6 @@
 package com.example.springsecurityoauth2client.service;
 
+import com.example.springsecurityoauth2client.certification.SelfCertification;
 import com.example.springsecurityoauth2client.common.converters.ProviderUserConverter;
 import com.example.springsecurityoauth2client.common.converters.ProviderUserRequest;
 import com.example.springsecurityoauth2client.model.*;
@@ -17,8 +18,12 @@ public class AbstractOAuth2UserService {
 
     private final UserRepository userRepository;
     private final UserService userService;
-
+    private final SelfCertification certification;
     private final ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter;
+
+    public void selfCertificate(ProviderUser providerUser){
+        certification.checkCertification(providerUser);
+    }
 
     public void register(ProviderUser providerUser, OAuth2UserRequest userRequest) {
 

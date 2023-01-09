@@ -19,7 +19,8 @@ public class DelegatingProviderUserConverter implements ProviderUserConverter<Pr
                 Arrays.asList(new UserDetailsProviderUserConverter(),
                         new OAuth2GoogleProviderUserConverter(),
                         new OAuth2NaverProviderUserConverter(),
-                        new OAuth2KakaoProviderUserConverter()
+                        new OAuth2KakaoProviderUserConverter(),
+                        new OAuth2KakaoOidcProviderUserConverter()
                         );
         this.converters = Collections.unmodifiableList(new LinkedList<>(providerUserConverters));
     }

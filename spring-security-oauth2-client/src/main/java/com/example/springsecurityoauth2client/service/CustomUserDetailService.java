@@ -1,12 +1,12 @@
 package com.example.springsecurityoauth2client.service;
 
+import com.example.springsecurityoauth2client.certification.SelfCertification;
 import com.example.springsecurityoauth2client.common.converters.ProviderUserConverter;
 import com.example.springsecurityoauth2client.common.converters.ProviderUserRequest;
 import com.example.springsecurityoauth2client.model.PrincipalUser;
 import com.example.springsecurityoauth2client.model.ProviderUser;
 import com.example.springsecurityoauth2client.model.users.User;
 import com.example.springsecurityoauth2client.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,10 +18,11 @@ public class CustomUserDetailService extends AbstractOAuth2UserService implement
 
     private final UserRepository userRepository;
 
-    public CustomUserDetailService(UserRepository userRepository, UserService userService, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter, UserRepository userRepository1) {
-        super(userRepository, userService, providerUserConverter);
+    public CustomUserDetailService(UserRepository userRepository, UserService userService, SelfCertification certification, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter, UserRepository userRepository1) {
+        super(userRepository, userService, certification, providerUserConverter);
         this.userRepository = userRepository1;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,6 +39,8 @@ public class CustomUserDetailService extends AbstractOAuth2UserService implement
 
         ProviderUserRequest providerUserRequest = new ProviderUserRequest(user);
         ProviderUser providerUser = providerUser(providerUserRequest);
+
+        selfCertificate(providerUser);
 
         return new PrincipalUser(providerUser);
     }

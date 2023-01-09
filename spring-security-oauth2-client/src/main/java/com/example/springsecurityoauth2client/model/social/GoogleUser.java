@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Map;
 
-public class GoogleUser extends OAuth2ProviderUser {
+public class  GoogleUser extends OAuth2ProviderUser {
 
     public GoogleUser(Attributes attributes, OAuth2User oAuth2User, ClientRegistration clientRegistration) {
         super(attributes.getMainAttributes(), oAuth2User, clientRegistration);
