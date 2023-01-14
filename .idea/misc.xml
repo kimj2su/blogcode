@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/algorithm" />
+    <file type="web" url="file://$PROJECT_DIR$/feign" />
     <file type="web" url="file://$PROJECT_DIR$/spring-security-oauth2-client" />
     <file type="web" url="file://$PROJECT_DIR$/stream-api" />
   </component>
