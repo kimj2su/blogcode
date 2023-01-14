@@ -38,4 +38,10 @@ public class DemoService {
         System.out.println("Header : " + response.getBody().getHeader());
         return "post";
     }
+
+    public String errorDecoder() {
+        demoFeignClient.callErrorDecoder();
+
+        return "error";
+    }
 }

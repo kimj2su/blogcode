@@ -1,7 +1,5 @@
 package com.example.feign.feign.intercepter;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Request;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -9,15 +7,16 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 @RequiredArgsConstructor(staticName = "of")
 public class DemoFeignInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-
         //get 요청일 경우
-        if (template.method() == Request.HttpMethod.GET.name()) {
+        if (Objects.equals(template.method(), Request.HttpMethod.GET.name())) {
+            template.header("CustomHeaderName", "aa");
             System.out.println("[GET] [DemoFeignInterceptor] queries : " + template.headers());
             System.out.println("[GET] [DemoFeignInterceptor] queries : " + template.queries());
             return;
