@@ -8,7 +8,6 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/algorithm" />
-        <option name="gradleJvm" value="corretto-11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/algorithm" />
@@ -19,6 +18,12 @@
         <option name="delegatedBuild" value="true" />
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+
+        <option name="externalProjectPath" value="$PROJECT_DIR$/spring-security-oauh2-resource-server" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/spring-security-oauh2-resource-server" />
+
         <option name="externalProjectPath" value="$PROJECT_DIR$/feign" />
         <option name="modules">
           <set>
@@ -32,6 +37,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/logback" />
+
           </set>
         </option>
       </GradleProjectSettings>
