@@ -3,12 +3,11 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/algorithm" />
-
-    <file type="web" url="file://$PROJECT_DIR$/spring-security-oauh2-resource-server" />
-
     <file type="web" url="file://$PROJECT_DIR$/feign" />
     <file type="web" url="file://$PROJECT_DIR$/logback" />
-
+    <file type="web" url="file://$PROJECT_DIR$/OAuth2Client" />
+    <file type="web" url="file://$PROJECT_DIR$/ResourceServer" />
+    <file type="web" url="file://$PROJECT_DIR$/spring-security-oauh2-resource-server" />
     <file type="web" url="file://$PROJECT_DIR$/spring-security-oauth2-client" />
     <file type="web" url="file://$PROJECT_DIR$/stream-api" />
   </component>
